@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One Small Gesture</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column of numbered steps; code windows run full column width. */
+:root{
+  --paper:#f4f2ed; --card:#fbfaf7; --ink:#161513; --muted:#66625b; --line:#d9d4c9;
+  --accent:#d4431a; --code-bg:#fbfaf7; --kw:#9a3412; --str:#1f6f4a; --com:#8b867d; --num:#1d4ed8; --fn:#6d28d9;
+  --sans:"Instrument Sans", Aptos, "Segoe UI", system-ui, sans-serif; --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#151412; --card:#1d1c19; --ink:#efece6; --muted:#a39e95; --line:#36332e;
+  --accent:#f0794f; --code-bg:#1b1a17; --kw:#f0a070; --str:#7fd3a6; --com:#7d786f; --num:#93b4ff; --fn:#c4a7ff; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#151412; --card:#1d1c19; --ink:#efece6; --muted:#a39e95; --line:#36332e;
+  --accent:#f0794f; --code-bg:#1b1a17; --kw:#f0a070; --str:#7fd3a6; --com:#7d786f; --num:#93b4ff; --fn:#c4a7ff; color-scheme:dark }
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:760px;margin:0 auto;padding-block:40px 80px;display:grid;gap:56px}
+h1{font-size:clamp(34px,6vw,52px);line-height:1.02;margin:0;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:24px;margin:0;line-height:1.2;text-wrap:balance;display:flex;gap:12px;align-items:baseline}
+h2 .n{font-family:var(--mono);font-size:13px;color:var(--accent);border:1px solid var(--accent);padding:1px 7px;flex:none;transform:translateY(-3px)}
+h3{font-size:15px;margin:18px 0 4px}
+p{margin:0} section{display:grid;gap:14px;min-width:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:19px;max-width:62ch}
+a{color:var(--accent);text-underline-offset:2px}
+figcaption{font-size:13px;color:var(--muted)}
+code{font-family:var(--mono);font-size:.86em;background:var(--card);border:1px solid var(--line);padding:0 4px}
+.code{border:1px solid var(--line);background:var(--code-bg);min-width:0}
+.code-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.code pre{margin:0;padding:14px;overflow-x:auto;font:13px/1.55 var(--mono)}
+.code pre code{background:none;border:0;padding:0;font-size:inherit}
+.copy{font:600 12px var(--sans);padding:4px 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;border-radius:0}
+.copy.done{background:transparent;color:var(--ink)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hljs-keyword,.hljs-literal,.hljs-built_in,.hljs-tag .hljs-name{color:var(--kw)} .hljs-string,.hljs-attr{color:var(--str)}
+.hljs-comment{color:var(--com);font-style:italic} .hljs-number{color:var(--num)} .hljs-title,.hljs-title.function_{color:var(--fn)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.opt{font:500 14px var(--sans);padding:7px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;border-radius:0}
+.opt[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.panel{display:grid;gap:10px}
+.how{font-size:14px;color:var(--muted)}
+ol,ul{margin:0;padding-left:22px;display:grid;gap:6px}
+.check{list-style:none;padding:0} .check li{padding-left:28px;position:relative} .check li::before{content:"";position:absolute;left:0;top:5px;width:14px;height:14px;border:1.5px solid var(--ink)}
+.box{border:1px solid var(--line);background:var(--card);padding:16px;display:grid;gap:8px}
+.box b{display:block}
+details{border:1px solid var(--line);background:var(--card)} details summary{cursor:pointer;padding:10px 14px;font-weight:600} details .code{border-width:1px 0 0}
+.files{display:grid;gap:12px}
+.statement{font-size:18px;border-left:3px solid var(--accent);padding:6px 0 6px 14px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0} dt{font-weight:600} dd{margin:0;color:var(--muted)}
+@media (max-width:520px){ dl{grid-template-columns:1fr} dd{margin-bottom:8px} }
+</style>
+
+<style>body{margin:0}</style>
+</head>
+<body>
+<main>
+<header style="display:grid;gap:14px">
+  <span class="eyebrow">Workshop 2 · Designing Digital-Remote Interactions · Studio task</span>
+  <h1>One Small Gesture</h1>
+  <p class="lede">Make a piece where a small gesture on a phone becomes a mark on your laptop screen. Anyone can join by scanning the QR code, so at the show and tell the audience draws the picture together.</p>
+  <p>Four steps, all in the p5.js web editor. Nothing to download or install. You only change one tab: <code>sketch.js</code>.</p>
+</header>
+
+<section>
+  <h2><span class="n">1</span>Make your own copy</h2>
+  <ol>
+    <li>Open the <a href="https://editor.p5js.org/feelers-ashley/sketches/Jyr2zhsxc" target="_blank" rel="noopener">starter sketch</a>. It opens in the p5.js editor.</li>
+    <li><b>Log in</b> (top right), or sign up for a free account. You need to be logged in to save.</li>
+    <li>Choose <b>File → Duplicate</b>. This is now your copy. Click the pencil next to its name and call it <i>One Small Gesture</i>.</li>
+    <li>Press <b>Play</b> (▶). Drag on the preview with your mouse: marks appear. Your mouse works like a phone, so you can test without one.</li>
+  </ol>
+  <p class="how">Open the file list with the small arrow (<b>&gt;</b>) at the top left of the code. You'll see <code>index.html</code>, <code>room.js</code> and <code>sketch.js</code>. Only change <code>sketch.js</code>.</p>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Join with your phone</h2>
+  <ol>
+    <li>Scan the QR code in the corner of your screen with your phone's camera.</li>
+    <li>Your phone becomes a touch pad. Touch it and drag: the marks appear on the laptop.</li>
+    <li>Ask the people next to you to scan it too. Each phone gets its own colour.</li>
+  </ol>
+  <p class="how">The phone and the laptop don't need to be on the same Wi-Fi. Each time you press Play, phones lose the link for a moment and reconnect by themselves after a few seconds.</p>
+</section>
+
+<section>
+  <h2><span class="n">3</span>Make it yours</h2>
+  <p>In the <code>sketch.js</code> tab there are three marked parts. For B and C, pick one option, copy it, and paste it over that whole part, from its <code>/* =====</code> line down to its <code>END</code> line. Press <b>Play</b> to see the change, and <b>File → Save</b> (Ctrl/Cmd+S) often.</p>
+  <h3>A · About</h3>
+  <p>Change the title, your name, the prompt (it appears on every phone), and the colours.</p>
+  <h3>B · Gesture: which touches make a mark</h3>
+  <div class="tabs" role="tablist"><button type="button" role="tab" class="opt" data-step="B" data-k="drag" aria-selected="true">Drag</button><button type="button" role="tab" class="opt" data-step="B" data-k="tap" aria-selected="false">Tap</button><button type="button" role="tab" class="opt" data-step="B" data-k="scroll" aria-selected="false">Scroll</button></div><div class="panel" data-step="B" data-k="drag" ><p>Touch and drag. Faster drags make bigger marks.</p><div class="code"><div class="code-bar"><span>sketch.js · replaces all of part B</span><button class="copy" data-i="0" type="button">Copy</button></div><pre><code class="language-javascript">/* ===== B · GESTURE ============================================ */
+// DRAG: touch and drag. Faster drags make bigger marks.
+function fingerDown(f) {
+  addMark(f.x, f.y, 0.4, f.hue);
+}
+
+function fingerMove(f) {
+  addMark(f.x, f.y, map(f.speed, 0, 40, 0.15, 1, true), f.hue);
+}
+
+function fingerUp(f) {}
+/* ===== END B ================================================== */</code></pre></div></div><div class="panel" data-step="B" data-k="tap" hidden><p>One tap, one mark. Nothing is sent by accident.</p><div class="code"><div class="code-bar"><span>sketch.js · replaces all of part B</span><button class="copy" data-i="1" type="button">Copy</button></div><pre><code class="language-javascript">/* ===== B · GESTURE ============================================ */
+// TAP: one tap, one mark.
+function fingerDown(f) {
+  addMark(f.x, f.y, random(0.4, 1), f.hue);
+}
+
+function fingerMove(f) {}
+
+function fingerUp(f) {}
+/* ===== END B ================================================== */</code></pre></div></div><div class="panel" data-step="B" data-k="scroll" hidden><p>The gesture of the feed. Swipe up and down on the phone; each phone draws down its own column.</p><div class="code"><div class="code-bar"><span>sketch.js · replaces all of part B</span><button class="copy" data-i="2" type="button">Copy</button></div><pre><code class="language-javascript">/* ===== B · GESTURE ============================================ */
+// SCROLL: swipe up and down. Each phone draws down its own column.
+let scrollY = {};
+
+function fingerDown(f) {}
+
+function fingerMove(f) {
+  const y = (scrollY[f.hue] ?? height / 2) - f.dy * 3;
+  scrollY[f.hue] = ((y % height) + height) % height;        // wrap around the screen
+  const x = width * (0.1 + (f.hue / 360) * 0.8);           // this phone&#x27;s column
+  addMark(x, scrollY[f.hue], map(abs(f.dy), 0, 60, 0.1, 1, true), f.hue);
+}
+
+function fingerUp(f) {}
+/* ===== END B ================================================== */</code></pre></div></div>
+  <h3>C · Response: what a mark looks like</h3>
+  <div class="tabs" role="tablist"><button type="button" role="tab" class="opt" data-step="C" data-k="ripples" aria-selected="true">Ripples</button><button type="button" role="tab" class="opt" data-step="C" data-k="blooms" aria-selected="false">Blooms</button><button type="button" role="tab" class="opt" data-step="C" data-k="constellation" aria-selected="false">Constellation</button></div><div class="panel" data-step="C" data-k="ripples" ><p>Each mark spreads out as a ring, then leaves a dot.</p><div class="code"><div class="code-bar"><span>sketch.js · replaces all of part C</span><button class="copy" data-i="3" type="button">Copy</button></div><pre><code class="language-javascript">/* ===== C · RESPONSE =========================================== */
+// RIPPLES: each mark spreads out as a ring, then leaves a small dot.
+const LIFE = 1600;   // how long a mark animates, in ms
+
+function animate(m, age) {            // runs every frame while age goes 0 → 1
+  const r = 20 + m.size * 220 * age;
+  noFill();
+  stroke(m.hue, 70, 100, 1 - age);
+  strokeWeight(1 + m.size * 4 * (1 - age));
+  circle(m.x, m.y, r * 2);
+  circle(m.x, m.y, r * 1.2);
+}
+
+function settle(m, g) {               // runs once: what stays on the picture
+  g.noStroke();
+  g.fill(m.hue, 60, 100, 0.55);
+  g.circle(m.x, m.y, 4 + m.size * 14);
+}
+/* ===== END C ================================================== */</code></pre></div></div><div class="panel" data-step="C" data-k="blooms" hidden><p>Each mark opens into a flower. The outlines stay behind and layer into a garden.</p><div class="code"><div class="code-bar"><span>sketch.js · replaces all of part C</span><button class="copy" data-i="4" type="button">Copy</button></div><pre><code class="language-javascript">/* ===== C · RESPONSE =========================================== */
+// BLOOMS: each mark opens into a flower and leaves its outline behind.
+const LIFE = 2200;
+
+function animate(m, age) {
+  const petals = 5 + floor(m.size * 7);
+  const r = (30 + m.size * 120) * (1 - pow(1 - age, 3));    // ease out
+  push();
+  translate(m.x, m.y);
+  rotate(age * 0.6);
+  noStroke();
+  fill(m.hue, 60, 100, 0.1 + 0.35 * (1 - age));
+  for (let i = 0; i &lt; petals; i++) {
+    rotate(TWO_PI / petals);
+    ellipse(r * 0.5, 0, r, r * 0.35);
+  }
+  pop();
+}
+
+function settle(m, g) {
+  const petals = 5 + floor(m.size * 7);
+  const r = 30 + m.size * 120;
+  g.push();
+  g.translate(m.x, m.y);
+  g.rotate(0.6);
+  g.noFill();
+  g.stroke(m.hue, 50, 100, 0.3);
+  g.strokeWeight(1);
+  for (let i = 0; i &lt; petals; i++) {
+    g.rotate(TWO_PI / petals);
+    g.ellipse(r * 0.5, 0, r, r * 0.35);
+  }
+  g.pop();
+}
+/* ===== END C ================================================== */</code></pre></div></div><div class="panel" data-step="C" data-k="constellation" hidden><p>Each mark links to marks already near it, whoever made them. No one draws the network; it emerges.</p><div class="code"><div class="code-bar"><span>sketch.js · replaces all of part C</span><button class="copy" data-i="5" type="button">Copy</button></div><pre><code class="language-javascript">/* ===== C · RESPONSE =========================================== */
+// CONSTELLATION: each mark links to the marks already near it, from anyone.
+const LIFE = 1400;
+const REACH = 140;   // how far a link can reach, in pixels
+
+function nearby(m) {
+  return settled
+    .filter((o) =&gt; o !== m &amp;&amp; dist(m.x, m.y, o.x, o.y) &lt; REACH * (0.5 + m.size))
+    .slice(-12);
+}
+
+function animate(m, age) {
+  const k = min(1, age * 2);
+  for (const o of nearby(m)) {
+    stroke(o.hue, 40, 100, (1 - age) * 0.8);
+    strokeWeight(1);
+    line(m.x, m.y, lerp(m.x, o.x, k), lerp(m.y, o.y, k));
+  }
+  noStroke();
+  fill(m.hue, 70, 100);
+  circle(m.x, m.y, 8 + m.size * 20 * (1 - age));
+}
+
+function settle(m, g) {
+  for (const o of nearby(m)) {
+    g.stroke(m.hue, 40, 100, 0.2);
+    g.strokeWeight(1);
+    g.line(m.x, m.y, o.x, o.y);
+  }
+  g.noStroke();
+  g.fill(m.hue, 60, 100, 0.9);
+  g.circle(m.x, m.y, 3 + m.size * 6);
+}
+/* ===== END C ================================================== */</code></pre></div></div>
+  <p class="how">To tune it, change one number at a time: <code>LIFE</code> is how long a mark animates; the bigger numbers in <code>animate()</code> and <code>settle()</code> set the size.</p>
+</section>
+
+<section>
+  <h2><span class="n">4</span>Show it</h2>
+  <ol>
+    <li>Save, then choose <b>File → Share</b> and copy the <b>Fullscreen</b> link. Open it in a new tab: your sketch fills the page, without the code.</li>
+    <li>Make the browser full screen: <b>Ctrl+Cmd+F</b> on a Mac, <b>F11</b> on Windows.</li>
+  </ol>
+  <p>Click the sketch once so it hears the keyboard, then:</p>
+  <dl>
+    <dt>S</dt><dd>save a still of the picture</dd>
+    <dt>C</dt><dd>clear the picture</dd>
+    <dt>Q</dt><dd>hide or show the QR code</dd>
+  </dl>
+</section>
+
+<section>
+  <h2>If something isn't working</h2>
+  <div class="box"><b>The phone says "waiting for the laptop sketch to run…".</b><p>Your sketch has stopped. Press <b>Play</b> on the laptop.</p></div>
+  <div class="box"><b>The phone says "connecting to the internet…", or the laptop corner says "reconnecting".</b><p>That device has lost its connection, or the network blocks it. Try the phone on mobile data. Your mouse still works on the laptop.</p></div>
+  <div class="box"><b>Nothing changed after I pasted.</b><p>Press <b>Play</b> again. The editor only reruns your sketch when you press it, unless <b>Auto-refresh</b> is ticked.</p></div>
+  <div class="box"><b>The preview is blank after pasting.</b><p>Look at the console under the code. A red error usually means a <code>/* =====</code> line was deleted or pasted twice.</p></div>
+  <div class="box"><b>"Duplicate" is greyed out, or my work disappeared.</b><p>You weren't logged in. Log in, open the starter sketch again, and duplicate it.</p></div>
+</section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+const BLOCKS = ["/* ===== B \u00b7 GESTURE ============================================ */\n// DRAG: touch and drag. Faster drags make bigger marks.\nfunction fingerDown(f) {\n  addMark(f.x, f.y, 0.4, f.hue);\n}\n\nfunction fingerMove(f) {\n  addMark(f.x, f.y, map(f.speed, 0, 40, 0.15, 1, true), f.hue);\n}\n\nfunction fingerUp(f) {}\n/* ===== END B ================================================== */", "/* ===== B \u00b7 GESTURE ============================================ */\n// TAP: one tap, one mark.\nfunction fingerDown(f) {\n  addMark(f.x, f.y, random(0.4, 1), f.hue);\n}\n\nfunction fingerMove(f) {}\n\nfunction fingerUp(f) {}\n/* ===== END B ================================================== */", "/* ===== B \u00b7 GESTURE ============================================ */\n// SCROLL: swipe up and down. Each phone draws down its own column.\nlet scrollY = {};\n\nfunction fingerDown(f) {}\n\nfunction fingerMove(f) {\n  const y = (scrollY[f.hue] ?? height / 2) - f.dy * 3;\n  scrollY[f.hue] = ((y % height) + height) % height;        // wrap around the screen\n  const x = width * (0.1 + (f.hue / 360) * 0.8);           // this phone's column\n  addMark(x, scrollY[f.hue], map(abs(f.dy), 0, 60, 0.1, 1, true), f.hue);\n}\n\nfunction fingerUp(f) {}\n/* ===== END B ================================================== */", "/* ===== C \u00b7 RESPONSE =========================================== */\n// RIPPLES: each mark spreads out as a ring, then leaves a small dot.\nconst LIFE = 1600;   // how long a mark animates, in ms\n\nfunction animate(m, age) {            // runs every frame while age goes 0 \u2192 1\n  const r = 20 + m.size * 220 * age;\n  noFill();\n  stroke(m.hue, 70, 100, 1 - age);\n  strokeWeight(1 + m.size * 4 * (1 - age));\n  circle(m.x, m.y, r * 2);\n  circle(m.x, m.y, r * 1.2);\n}\n\nfunction settle(m, g) {               // runs once: what stays on the picture\n  g.noStroke();\n  g.fill(m.hue, 60, 100, 0.55);\n  g.circle(m.x, m.y, 4 + m.size * 14);\n}\n/* ===== END C ================================================== */", "/* ===== C \u00b7 RESPONSE =========================================== */\n// BLOOMS: each mark opens into a flower and leaves its outline behind.\nconst LIFE = 2200;\n\nfunction animate(m, age) {\n  const petals = 5 + floor(m.size * 7);\n  const r = (30 + m.size * 120) * (1 - pow(1 - age, 3));    // ease out\n  push();\n  translate(m.x, m.y);\n  rotate(age * 0.6);\n  noStroke();\n  fill(m.hue, 60, 100, 0.1 + 0.35 * (1 - age));\n  for (let i = 0; i < petals; i++) {\n    rotate(TWO_PI / petals);\n    ellipse(r * 0.5, 0, r, r * 0.35);\n  }\n  pop();\n}\n\nfunction settle(m, g) {\n  const petals = 5 + floor(m.size * 7);\n  const r = 30 + m.size * 120;\n  g.push();\n  g.translate(m.x, m.y);\n  g.rotate(0.6);\n  g.noFill();\n  g.stroke(m.hue, 50, 100, 0.3);\n  g.strokeWeight(1);\n  for (let i = 0; i < petals; i++) {\n    g.rotate(TWO_PI / petals);\n    g.ellipse(r * 0.5, 0, r, r * 0.35);\n  }\n  g.pop();\n}\n/* ===== END C ================================================== */", "/* ===== C \u00b7 RESPONSE =========================================== */\n// CONSTELLATION: each mark links to the marks already near it, from anyone.\nconst LIFE = 1400;\nconst REACH = 140;   // how far a link can reach, in pixels\n\nfunction nearby(m) {\n  return settled\n    .filter((o) => o !== m && dist(m.x, m.y, o.x, o.y) < REACH * (0.5 + m.size))\n    .slice(-12);\n}\n\nfunction animate(m, age) {\n  const k = min(1, age * 2);\n  for (const o of nearby(m)) {\n    stroke(o.hue, 40, 100, (1 - age) * 0.8);\n    strokeWeight(1);\n    line(m.x, m.y, lerp(m.x, o.x, k), lerp(m.y, o.y, k));\n  }\n  noStroke();\n  fill(m.hue, 70, 100);\n  circle(m.x, m.y, 8 + m.size * 20 * (1 - age));\n}\n\nfunction settle(m, g) {\n  for (const o of nearby(m)) {\n    g.stroke(m.hue, 40, 100, 0.2);\n    g.strokeWeight(1);\n    g.line(m.x, m.y, o.x, o.y);\n  }\n  g.noStroke();\n  g.fill(m.hue, 60, 100, 0.9);\n  g.circle(m.x, m.y, 3 + m.size * 6);\n}\n/* ===== END C ================================================== */"];
+try { window.hljs && hljs.highlightAll(); } catch (e) {}
+document.querySelectorAll('.copy').forEach((b) => b.addEventListener('click', () => {
+  const text = BLOCKS[+b.dataset.i];
+  const done = () => { b.textContent = 'Copied'; b.classList.add('done'); setTimeout(() => { b.textContent = 'Copy'; b.classList.remove('done'); }, 1600); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(b.closest('.code').querySelector('code')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected — press Ctrl/Cmd+C'; };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+}));
+function pick(step, k) {
+  document.querySelectorAll('.opt[data-step="' + step + '"]').forEach((t) => t.setAttribute('aria-selected', t.dataset.k === k ? 'true' : 'false'));
+  document.querySelectorAll('.panel[data-step="' + step + '"]').forEach((p) => { p.hidden = p.dataset.k !== k; });
+  try { localStorage.setItem('osg-step-' + step, k); } catch (e) {}
+}
+document.querySelectorAll('.opt').forEach((t) => t.addEventListener('click', () => pick(t.dataset.step, t.dataset.k)));
+['B', 'C'].forEach((s) => { let k = null; try { k = localStorage.getItem('osg-step-' + s); } catch (e) {} if (k && document.querySelector('.opt[data-step="' + s + '"][data-k="' + k + '"]')) pick(s, k); });
+</script>
+
+</body>
+</html>
